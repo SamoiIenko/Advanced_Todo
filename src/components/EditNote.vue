@@ -31,7 +31,7 @@
         },
         methods: {
             save_edit() {
-                this.$store.state.notes[this.id].task = this.data.task;
+                this.$store.state.notes[this.id] = this.data;
                 this.$emit('save_edit');
             },
             add_task(){
