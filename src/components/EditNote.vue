@@ -31,13 +31,14 @@
         },
         methods: {
             save_edit() {
+                this.$store.state.notes[this.id].task = this.data.task;
                 this.$emit('save_edit');
             },
             add_task(){
                 this.data.task.push({
                     name: '',
                     complete: false
-                })          
+                })
             },
             delete_note(){
                 this.data.task.splice(this.currentIndex, 1);

@@ -8,7 +8,7 @@
     export default {
         methods: {
             saved() {
-                console.log(this);
+                this.$store.dispatch('save_storage');
             }
         }
     }

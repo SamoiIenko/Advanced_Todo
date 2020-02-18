@@ -38,36 +38,36 @@
                     title: '',
                     task: []
                 },
-                notes: this.$store.state.notes
+                notes: localStorage.saveNotes ? JSON.parse(localStorage.saveNotes) : this.$store.state.notes,
+
             }
         },
 
         methods: {              
             add_note(){
                 if(this.new_note.title) {
-                    this.notes.push({
+                    this.$store.state.notes.push({
                         title: this.new_note.title,
                         task: this.new_note.task
                     });
+                    this.$store.dispatch('save_storage');
+                    this.notes = this.$store.state.notes;
                     this.new_note.task = [];
-                var saveTitle = JSON.stringify(this.new_note.title);
-                localStorage.setItem('this.new_note.title', saveTitle);
-                console.log(saveTitle); 
                     
                 }
                 this.new_note.title = '';
             },
+
             add_action(){
                 this.new_note.task.push({
                     name: '',
                     complete: false
                 });
-                var saveTask = JSON.stringify(this.new_note.task);
-                localStorage.setItem('this.new_note.task', saveTask);           
-                console.log(saveTask);
             },
             delete_note() {
                 this.notes.splice(this.currentIndex, 1);
+                this.$store.state.notes.splice(this.currentIndex, 1)
+                this.$store.dispatch('save_storage');
                 this.showModal = false;
             },
 
